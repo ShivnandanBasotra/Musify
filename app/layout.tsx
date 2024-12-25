@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Appbar from "@/components/Appbar";
-import { ThemeProvider } from "./providers/ThemeProvider";
-import { ClerkProvider } from "@clerk/nextjs";
+import { Providers } from "../providers/Providers";
+import { Toaster } from "@/components/ui/toaster";
 
 
 const geistSans = Geist({
@@ -27,17 +27,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <Providers attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Appbar />
+          <Toaster/>
           {children}
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
-    </ClerkProvider>
   );
 }

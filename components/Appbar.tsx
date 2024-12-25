@@ -1,19 +1,14 @@
 "use client"
-
 import React, { useEffect, useState } from 'react'
 import { Moon, Sun, Github} from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
-import { SignedIn, SignedOut, useClerk } from '@clerk/nextjs'
-import { useRouter } from 'next/navigation'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 function Appbar() {
     const {theme, setTheme} = useTheme();
     const [mounted, setMounted] = useState(false);
-    const {signOut} = useClerk();
-    const Router = useRouter();
-
-  
+    const session = useSession();
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -25,13 +20,7 @@ function Appbar() {
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">YourSpace</div>
             <div className="flex items-center space-x-4">
-             
-              <SignedOut>
-              <Button onClick={()=>{Router.push("/sign-in")}} variant="outline" size="sm">Login</Button>
-             </SignedOut>
-             <SignedIn>
-              <Button onClick={()=>{signOut()}} variant="outline" size="sm">Logout</Button>
-             </SignedIn>
+              {session.data?.user ? <Button onClick={()=>{signOut()}} variant="outline" size="sm">Logout</Button>: <Button onClick={()=>{signIn()}} variant="outline" size="sm">Login</Button>}
               <Button variant="outline" size="sm">
                 <Github className="mr-2 h-4 w-4" />
                 GitHub

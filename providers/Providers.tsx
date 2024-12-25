@@ -1,9 +1,10 @@
 "use client"
 
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { useEffect, useState } from "react";
 
-export function ThemeProvider({
+export function Providers ({
   children,
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
@@ -16,5 +17,5 @@ export function ThemeProvider({
   if (!mounted) {
     return null
   }
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
+  return <SessionProvider><NextThemesProvider {...props}>{children}</NextThemesProvider></SessionProvider>
 }
