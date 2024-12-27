@@ -7,4 +7,10 @@ export const signupSchema = z.object({
     lastName:z.string().min(1)
 })
 
+export const createSpaceSchema = z.object({
+    name: z.string().min(1),
+    description:z.string().optional()
+})
+
 export type SignupSchemaType = z.infer<typeof signupSchema>;
+export type createSpaceSchemaTpe = z.infer<typeof createSpaceSchema>;

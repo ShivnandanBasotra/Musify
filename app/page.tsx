@@ -2,8 +2,10 @@
 
 import { Music, Users, Globe, Play } from 'lucide-react'
 import { Button } from "@/components/ui/button"
+import { useRouter } from 'next/navigation'
 
 export default function LandingPage() {
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
       <main className="container mx-auto px-6 py-12">
@@ -14,7 +16,7 @@ export default function LandingPage() {
           <p className="text-xl mb-8 text-gray-600 dark:text-gray-300">
             Connect, share, and listen to music with friends in your personalized space.
           </p>
-          <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white">
+          <Button onClick={()=>{router.push("/dashboard")}} size="lg" className="bg-purple-600 hover:bg-purple-700 text-white">
             <Play className="mr-2 h-5 w-5" /> Stream Now
           </Button>
         </section>
@@ -41,7 +43,7 @@ export default function LandingPage() {
           <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
             Ready to Start Your Journey?
           </h2>
-          <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white">
+          <Button onClick={()=>{router.push("/dashboard")}} size="lg" className="bg-purple-600 hover:bg-purple-700 text-white">
             Create Your Space
           </Button>
         </section>
@@ -49,7 +51,7 @@ export default function LandingPage() {
 
       <footer className="bg-gray-200 dark:bg-gray-800 py-6 mt-20">
         <div className="container mx-auto px-6 text-center text-gray-600 dark:text-gray-400">
-          © 2023 YourSpace. All rights reserved.
+          © 2023 Musify. All rights reserved.
         </div>
       </footer>
     </div>
